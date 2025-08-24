@@ -1,0 +1,275 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Lavender Portfolio Design System */
+
+@layer base {
+  :root {
+    /* Lavender Theme Colors */
+    --background: 250 50% 12%;
+    --background-secondary: 250 40% 16%;
+    --foreground: 280 20% 95%;
+    
+    /* Lavender Color Palette */
+    --lavender-light: 280 70% 85%;
+    --lavender: 280 60% 70%;
+    --lavender-dark: 280 40% 55%;
+    --violet: 260 60% 65%;
+    --purple-deep: 250 50% 40%;
+    --purple-darker: 250 60% 25%;
+    
+    /* Semantic Colors */
+    --primary: 280 60% 70%;
+    --primary-foreground: 250 50% 8%;
+    --primary-glow: 280 70% 85%;
+    
+    --secondary: 250 40% 12%;
+    --secondary-foreground: 280 20% 95%;
+    
+    --accent: 260 60% 65%;
+    --accent-foreground: 250 50% 8%;
+    
+    --muted: 250 30% 15%;
+    --muted-foreground: 280 15% 65%;
+    
+    --card: 250 40% 10%;
+    --card-foreground: 280 20% 95%;
+    
+    --border: 250 30% 20%;
+    --input: 250 30% 18%;
+    --ring: 280 60% 70%;
+    
+    /* Custom Properties */
+    --radius: 1rem;
+    --nav-height: 80px;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--lavender)) 0%, hsl(var(--violet)) 50%, hsl(var(--purple-deep)) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--background-secondary)) 100%);
+    --gradient-text: linear-gradient(135deg, hsl(var(--lavender-light)) 0%, hsl(var(--lavender)) 50%, hsl(var(--violet)) 100%);
+    
+    /* Shadows & Effects */
+    --shadow-lavender: 0 20px 40px -10px hsl(var(--lavender) / 0.3);
+    --shadow-glow: 0 0 50px hsl(var(--primary-glow) / 0.4);
+    --shadow-card: 0 10px 30px -5px hsl(var(--background) / 0.8);
+    
+    /* Animations */
+    --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-family: 'Inter', system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary));
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--lavender));
+  }
+
+  /* Selection */
+  ::selection {
+    background: hsl(var(--primary) / 0.3);
+    color: hsl(var(--foreground));
+  }
+}
+
+@layer components {
+  /* Starry Background */
+  .starry-bg {
+    position: relative;
+    background: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--background-secondary)) 100%);
+  }
+
+  .starry-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      radial-gradient(1px 1px at 20px 30px, hsl(var(--lavender-light)), transparent),
+      radial-gradient(1px 1px at 40px 70px, hsl(var(--violet)), transparent),
+      radial-gradient(1px 1px at 90px 40px, hsl(var(--lavender)), transparent),
+      radial-gradient(1px 1px at 130px 80px, hsl(var(--primary-glow)), transparent),
+      radial-gradient(2px 2px at 160px 30px, hsl(var(--lavender-light)), transparent);
+    background-repeat: repeat;
+    background-size: 200px 100px;
+    animation: twinkle 20s linear infinite;
+    opacity: 0.7;
+  }
+
+  /* Custom Cursor */
+  .custom-cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background: hsl(var(--primary));
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.2s ease;
+    box-shadow: var(--shadow-glow);
+  }
+
+  .custom-cursor.expand {
+    transform: scale(2);
+    background: hsl(var(--primary) / 0.5);
+  }
+
+  /* Typography */
+  .gradient-text {
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-hero {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  /* Glass Card Effect */
+  .glass-card {
+    background: hsl(var(--card) / 0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid hsl(var(--border) / 0.5);
+    box-shadow: var(--shadow-card);
+  }
+
+  /* Hover Effects */
+  .hover-lift {
+    transition: var(--transition-smooth);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lavender);
+  }
+
+  /* Glow Effect */
+  .glow {
+    position: relative;
+  }
+
+  .glow::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--gradient-primary);
+    border-radius: inherit;
+    opacity: 0;
+    transition: var(--transition-smooth);
+    z-index: -1;
+    filter: blur(20px);
+  }
+
+  .glow:hover::before {
+    opacity: 0.7;
+  }
+
+  /* Navigation */
+  .nav-blur {
+    backdrop-filter: blur(20px);
+    background: hsl(var(--background) / 0.8);
+    border-bottom: 1px solid hsl(var(--border) / 0.5);
+  }
+}
+
+@layer utilities {
+  /* Animation Classes */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.8s ease-out;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 1s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.6s ease-out;
+  }
+}
+
+/* Keyframes */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes glow {
+  0% { text-shadow: 0 0 20px hsl(var(--primary) / 0.5); }
+  100% { text-shadow: 0 0 30px hsl(var(--primary) / 0.8), 0 0 40px hsl(var(--lavender) / 0.5); }
+}
+
+@keyframes slideUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  0% { opacity: 0; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
