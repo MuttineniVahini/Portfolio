@@ -52,3 +52,5 @@ The project can be deployed to any static hosting service that supports single-p
 ## Contact
 
 For inquiries or collaboration, please reach out via the contact form on the website or through the provided contact details.
+
+Thank you for visiting my portfolio!
